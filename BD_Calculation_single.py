@@ -24,7 +24,7 @@ step_lamb = 10.
 
 tab = fm.load_txt_files(np.arange(lambmin, lambmax+step_lamb*0.5, step_lamb), tabepsmat)
 
-result_absorption = fm. main_loop(tab, photoactive, elayer, lambmin, lambmax, step_lamb, incident_angle)
+result_absorption = fm. main(tab, photoactive, elayer, lambmin, lambmax, step_lamb, incident_angle)
 
 plt.figure(figsize=(6,5), tight_layout=True)
 plt.plot(result_absorption[:,0], result_absorption[:,1], label="Absorption")
