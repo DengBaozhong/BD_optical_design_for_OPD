@@ -18,7 +18,7 @@ def process_combination(combo):
     
     tab = fm.load_txt_files(np.arange(300, 1000+10*0.5, 10),tabepsmat)
     # nmed = np.size(tabepsmat)
-    result_absorption = fm.main_loop(tab, 3, elayer, 300, 1000, 10, 0)
+    result_absorption = fm.main(tab, 3, elayer, 300, 1000, 10, 0)
     
     return result_absorption, n, d1, d2
 
