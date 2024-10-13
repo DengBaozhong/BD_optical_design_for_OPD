@@ -180,7 +180,7 @@ def initialize_parameters(tab, ipm6, elayer, lambmin, lambmax, dlamb, incident_a
     
     return nmed, tablamb, zint, sinus
 
-def main_loop (tab, ipm6, elayer, lambmin, lambmax, dlamb, incident_angle):
+def main (tab, ipm6, elayer, lambmin, lambmax, dlamb, incident_angle):
     nmed, tablamb, zint, sinus = initialize_parameters(tab, ipm6, elayer, lambmin, lambmax, dlamb, incident_angle)
 
     # tab 是 (7, 80, 3) 的数组，nmed 是材料的个数，tablamb是波长范围
