@@ -198,4 +198,34 @@ def main (tab, ipm6, elayer, lambmin, lambmax, dlamb, incident_angle):
     
     return result_absorption
 
+if __name__=='__main__':
+    tabepsmat = ['Air','Ag','Au','MoO3','PM6ec9','ZnO','Si']
+    elayer = np.array([15,2.5,15,200,50], dtype=np.float64)
     
+    zint = np.zeros(len(elayer) + 1, dtype=np.float32)
+    zint[1:] = np.cumsum(elayer.astype(np.float32))
+    
+    BHJ = 4
+    incident_angle = 0
+    
+    lambmin = 800.
+    lambmax = 850.
+    dlamb = 10.
+    
+    tab = load_txt_files(np.arange(lambmin, lambmax+dlamb*0.5, dlamb),tabepsmat)
+    
+    nmed = np.size(tabepsmat)
+    
+    EQE = main(tab, BHJ, elayer, lambmin, lambmax, dlamb, 0)
+    
+    # ================== 绘图 ==================
+    import matplotlib.pyplot as plt
+    # 正向光谱图
+    fig, ax = plt.subplots(figsize=(8, 6), tight_layout=True)
+    ax.plot(EQE[:,0], EQE[:,1], label="EQE")
+    ax.set_xlabel("Wavelength (nm)")
+    ax.set_ylabel("Percentage (%)")
+    ax.set_title("Forward: Transmission/Reflection/Absorption\n")
+    ax.legend()
+    
+    plt.show()
