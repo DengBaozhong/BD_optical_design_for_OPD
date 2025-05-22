@@ -30,10 +30,10 @@ def process_combination(combo):
     return n1, n2, d1, d2, EQE
 
 if __name__ == '__main__':
-    range_n1 = np.arange(1, 3.1, 0.5)
-    range_n2 = np.arange(1, 3.1, 0.5)
-    range_d1 = np.arange(0, 200.1, 50)
-    range_d2 = np.arange(0, 200.1, 50)
+    range_n1 = np.arange(1, 3.1, 0.1)
+    range_n2 = np.arange(1, 3.1, 0.1)
+    range_d1 = np.arange(0, 200.1, 10)
+    range_d2 = np.arange(0, 200.1, 10)
     
     # Using itertools.product to generate combinations without creating a large meshgrid
     combinations = np.array(list(itertools.product(range_n1, range_n2, range_d1, range_d2)))
