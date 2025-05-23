@@ -18,16 +18,23 @@ def process_combination(combo):
     
     BHJ = tabepsmat.index('PM6ec9')     #BHJ的位置
     
-    lambmin = 800.
+    lambmin = 400.
     lambmax = 850.
     dlamb = 10.
     
     tab = fm.load_txt_files(np.arange(lambmin, lambmax+dlamb*0.5, dlamb),tabepsmat)
     
     EQE = fm.main(tab, BHJ, elayer, lambmin, lambmax, dlamb, 0)
-    EQE = np.average(EQE[:,1])
     
-    return n1, n2, d1, d2, EQE
+    # 筛选400-700nm范围内的数据
+    mask = (EQE[:,0] >= 400) & (EQE[:,0] <= 700)
+    EQE_400_700 = np.average(EQE[mask, 1])  # 计算筛选范围内第二列的平均值
+    
+    # 筛选800-850nm范围内的数据
+    mask = (EQE[:,0] >= 800) & (EQE[:,0] <= 850)
+    EQE_800_850 = np.average(EQE[mask, 1])
+    
+    return n1, n2, d1, d2, EQE_400_700, EQE_800_850
 
 if __name__ == '__main__':
     range_n1 = np.arange(1, 3.1, 0.1)
@@ -65,6 +72,6 @@ if __name__ == '__main__':
                results_array.reshape(-1, results_array.shape[-1]),
                delimiter=',',  # 明确指定逗号分隔
                fmt='%.6f',     # 控制浮点数格式（可选）
-               header='n1, n2, d1, d2, EQE',  # 列名
+               header='n1, n2, d1, d2, EQE400~700, EQE800~850',  # 列名
                comments='')    # 避免header以#开头（可选）
 
