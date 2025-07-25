@@ -13,11 +13,8 @@ from tqdm import tqdm
 
 def process_combination(combo):
     n1, n2, d1, d2, d3 = combo
-    tabepsmat = ['Air',n1,n2,'Ag','Au','MoO3','PCE10','BCP','PM6ec9','ZnO','ITO','Glass']
-    elayer = np.array([d1,d2,15,2.5,15,d3,5,200,50,150], dtype=np.float64)
-    
-    if d3<=0.1:
-        elayer[6]=0    #如果没有PCE10，BCP也没有
+    tabepsmat = ['Air',n1,n2,'Ag','Au','MoO3','PCE10','PM6ec9','ZnO','ITO','Glass']
+    elayer = np.array([d1,d2,15,2.5,15,d3,200,50,150], dtype=np.float64)
     
     BHJ = tabepsmat.index('PM6ec9')     #BHJ的位置
     
@@ -83,3 +80,4 @@ if __name__ == '__main__':
                fmt='%.4f',     # 控制浮点数格式（可选）
                header='n1, n2, d1, d2, d3, EQE380~760, EQE800~850, k, EQE300~760',  # 列名
                comments='')    # 避免header以#开头（可选）
+
